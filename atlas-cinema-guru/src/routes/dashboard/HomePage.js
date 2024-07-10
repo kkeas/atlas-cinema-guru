@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './dashboard.css';
-// import MovieCard from '../../components/movies/MovieCard';
-//import Filter from '../../components/movies/Filter';
+import Filter from '../../components/movies/Filter';
 import Button from '../../components/general/Button';
 import axios from 'axios';
 
@@ -19,18 +18,17 @@ function HomePage() {
     try {
       const response = await axios.get('http://localhost:8000/api/titles/advancedsearch', {
         headers: {
-          Authorization: `Bearer ${accessToken}` // Use the token in the Authorization header
+          Authorization: `Bearer ${accessToken}`
         },
         params: {
           minYear: minYear,
           maxYear: maxYear,
-          genres: genres.join(','), // Assuming API expects comma-separated values
+          genres: genres.join(','),
           title: title,
           sort: sort,
           page: page,
         }
       });
-      // Append the new movies to the existing ones
       setMovies(prevMovies => [...prevMovies, ...response.data.titles]);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -39,23 +37,10 @@ function HomePage() {
 
   useEffect(() => {
     loadMovies(page);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [minYear, maxYear, genres, sort, title, page]); 
+  }, [minYear, maxYear, genres, sort, title, page]);
 
   return (
     <div className="home-page">
-      {/* <Filter
-        minYear={minYear} setMinYear={setMinYear}
-        maxYear={maxYear} setMaxYear={setMaxYear}
-        genres={genres} setGenres={setGenres}
-        sort={sort} setSort={setSort}
-        title={title} setTitle={setTitle}
-      />
-      <ul className="movie-list">
-        {movies.map(movie => (
-          <MovieCard key={movie.imdbId} movie={movie} />
-        ))}
-      </ul> */}
       <Button label="Load More.." onClick={() => setPage(prevPage => prevPage + 1)} />
     </div>
   );

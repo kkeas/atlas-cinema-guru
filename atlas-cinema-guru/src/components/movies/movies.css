@@ -1,0 +1,22 @@
+@import '../../App.css';
+
+/* #region GENRES */
+
+.genre-tag {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid var(--color-light-red);
+  border-radius: 15px;
+  display: inline-block;
+  background-color: var(--color-dark-gray);
+  color: var(--color-white);
+}
+
+.genre-tag.selected {
+  background-color: var(--color-light-red);
+  color: var(--color-white);
+  border-color: var(--color-light-red);
+}
+
+/* #endregion */
